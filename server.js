@@ -19,7 +19,7 @@ db.once('open', () => console.log('connected to the database'))
 // const swaggerFile = require('./swagger_output.json')
 // app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerFile))
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Listening on PORT ${PORT}`)
     console.log("API Documentation:", `http://localhost:${PORT}/api-docs`)
