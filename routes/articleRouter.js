@@ -1,7 +1,10 @@
 const express = require('express');
 const articleRouter = express.Router();
 const Article = require('../models/article');
-
+const cool = require('cool-ascii-faces')
+articleRouter.get('/coolfaces', (req, res) => {
+    res.send(cool())
+})
 articleRouter.get('/article', async (req, res) => {
     try {
         const articles = await Article.find()

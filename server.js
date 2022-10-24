@@ -15,9 +15,9 @@ const db = mongoose.connection
 db.on('error', (error) => console.log(error))
 db.once('open', () => console.log('connected to the database'))
 
-const swaggerUI = require('swagger-ui-express')
-const swaggerFile = require('./swagger_output.json')
-app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerFile))
+// const swaggerUI = require('swagger-ui-express')
+// const swaggerFile = require('./swagger_output.json')
+// app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerFile))
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
