@@ -20,6 +20,14 @@ const articleSchema = new mongoose.Schema({
         default: 0,
         immutable: true,
     },
+    subject: {
+        type: String,
+        default: "",
+    },
+    articleOwner: {
+        type: String,
+        default: "",
+    },
     image: {
         data: Buffer,
         contentType: String,
