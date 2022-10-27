@@ -1,11 +1,6 @@
 const express = require('express');
 const articleRouter = express.Router();
 const Article = require('../models/article');
-const cool = require('cool-ascii-faces');
-const article = require('../models/article');
-articleRouter.get('/coolfaces', (req, res) => {
-    res.send(cool())
-})
 
 articleRouter.get('/article', paginatedResults, async (req, res) => {
     res.status(200).json(res.articles)
@@ -16,8 +11,8 @@ articleRouter.get('/article/:id',getArticle, async (req, res) => {
 })
 
 articleRouter.post('/article', async (req, res) => {
-    const article = await Article.create({ ...req.body })
     try {
+        const article = await Article.create({ ...req.body })
         const newArticle = await article.save()
         res.status(201).json(newArticle)
     } catch (err) {
@@ -28,7 +23,8 @@ articleRouter.post('/article', async (req, res) => {
 articleRouter.patch('/article/:id', async (req, res) => {
     try {
         id = req.params.id
-        const updatedArticle = await Article.findOneAndUpdate({ _id: id}, { ...req.body }, { new: true })
+        const update = { ...req.body, updatedAt: Date.now() }
+        const updatedArticle = await Article.findOneAndUpdate({ _id: id}, update, { new: true })
         return res.status(200).json(updatedArticle)
     }
     catch (err) {
