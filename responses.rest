@@ -1,0 +1,25 @@
+GET http://localhost:3000/employee
+
+###
+
+GET http://localhost:3000/employee/635a79909ed15c8c203cd978
+
+###
+
+POST http://localhost:3000/employee
+Content-Type: application/json
+
+{
+    "firstName": "Kantinan",
+    "lastName": "Saengprachathanarak",
+    "birthDay": "11-04-2003"
+}
+
+###
+
+PATCH http://localhost:3000/employee/635a79909ed15c8c203cd978
+Content-Type: application/json
+
+{
+    "birthDay": "11-05-2003"
+}

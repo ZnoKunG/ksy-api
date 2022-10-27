@@ -2,14 +2,14 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const articleRouter = require('./routes/articleRouter');
+const employeeRouter = require('./routes/employeeRouter');
 require('dotenv').config()
 
 const app = express()
 app.use(express.json())
 app.use(cors())
 app.use(bodyParser.urlencoded( { extended: false }))
-app.use(articleRouter)
+app.use(employeeRouter)
 
 mongoose.connect(process.env.MONGO_URL)
 const db = mongoose.connection
@@ -24,5 +24,4 @@ db.once('open', () => console.log('connected to the database'))
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Listening on PORT ${PORT}`)
-    console.log("API Documentation:", `http://localhost:${PORT}/api-docs`)
 })
