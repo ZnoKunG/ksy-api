@@ -1,25 +1,29 @@
-GET http://localhost:3000/employee
+GET http://localhost:3759/user
 
 ###
 
-GET http://localhost:3000/employee/635a79909ed15c8c203cd978
+GET http://localhost:3759/user/635bcbac6e5dc441992ca305
 
 ###
 
-POST http://localhost:3000/employee
+POST http://localhost:3759/user
 Content-Type: application/json
 
 {
-    "firstName": "Kantinan",
-    "lastName": "Saengprachathanarak",
-    "birthDay": "11-04-2003"
+    "name": "Zno",
+    "email": "test@gmail.com",
+    "password": "1234"
 }
 
 ###
 
-PATCH http://localhost:3000/employee/635a79909ed15c8c203cd978
+PATCH http://localhost:3759/user/635bcbac6e5dc441992ca305
 Content-Type: application/json
 
 {
-    "birthDay": "11-05-2003"
+    "name": "ZnoKunG"
 }
+
+###
+
+DELETE http://localhost:3759/user/635bce1c2b4e86da82cd5f98

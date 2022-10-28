@@ -1,15 +1,21 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const cors = require('cors');
 const employeeRouter = require('./routes/employeeRouter');
+const userRouter = require('./routes/userRouter');
 require('dotenv').config()
 
+var corsOptions = {
+    origin: 'http://localhost:3500/',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+const cors = require('cors');
 const app = express()
 app.use(express.json())
 app.use(cors())
 app.use(bodyParser.urlencoded( { extended: false }))
 app.use(employeeRouter)
+app.use(userRouter)
 
 mongoose.connect(process.env.MONGO_URL)
 const db = mongoose.connection

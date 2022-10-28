@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start-swagger": "npm run swagger-autogen && npm run start",
     "start": "node server.js",
     "devStart": "nodemon server.js",
     "swagger-autogen": "node swagger-autogen.js",
@@ -21,6 +20,7 @@
   },
   "homepage": "https://github.com/ZnoKunG/10daysproject-api#readme",
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "body-parser": "^1.20.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
