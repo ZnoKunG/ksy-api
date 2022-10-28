@@ -12,12 +12,13 @@ userRouter.get('/user', async (req, res) => {
     }
 })
 
-userRouter.get('/user/:id', getUser, async (req, res) => {
+userRouter.get('/user/:email', getUserByEmail, async (req, res) => {
     res.status(200).json(res.user)
 })
 
 userRouter.post('/user', async (req, res) => {
     try {
+        await User.init()
         userData = { ...req.body }
         const hashedPassword = await bcrypt.hash(userData.password, 10)
         userData.password = hashedPassword
@@ -54,7 +55,7 @@ userRouter.delete('/user', async (req, res) => {
     try {
         const confirmDelete = req.query.confirm == "true" ? true : false
         if (confirmDelete){
-            User.deleteMany({})
+            await User.deleteMany({})
             res.json({ mesage: "All users were deleted"})
         } else {
             res.status(400).json({message: "did not confirm to delete all users"})
@@ -79,4 +80,18 @@ async function getUser(req, res, next) {
     next()
 }
 
+async function getUserByEmail(req, res, next) { 
+    let user
+    try {
+        email = req.params.email
+        user = await User.findOne({ email: email })
+        if (user == null) {
+            return res.status(404).json( { message: `An user from email ${email} Not Found`} )
+        }
+    } catch (err) {
+        return res.status(500).json({ message: err.message })
+    }
+    res.user = user
+    next()
+}
 module.exports = userRouter;

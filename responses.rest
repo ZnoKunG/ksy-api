@@ -2,7 +2,7 @@ GET http://localhost:3759/user
 
 ###
 
-GET http://localhost:3759/user/635bcbac6e5dc441992ca305
+GET http://localhost:3759/user/test@gmail.com
 
 ###
 
@@ -11,13 +11,13 @@ Content-Type: application/json
 
 {
     "name": "Zno",
-    "email": "test@gmail.com",
+    "email": "test2@gmail.com",
     "password": "1234"
 }
 
 ###
 
-PATCH http://localhost:3759/user/635bcbac6e5dc441992ca305
+PATCH http://localhost:3759/user/635bd22f4808257bf1cbdb05
 Content-Type: application/json
 
 {
@@ -26,4 +26,8 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3759/user/635bce1c2b4e86da82cd5f98
+DELETE http://localhost:3759/user/635bce1c2b4e86da82cd5f95
+
+### 
+
+DELETE http://localhost:3759/user?confirm=true
