@@ -17,6 +17,16 @@ Content-Type: application/json
 
 ###
 
+POST http://localhost:3759/user/login
+Content-Type: application/json
+
+{
+    "email": "test2@gmail.com",
+    "password": "1234"
+}
+
+###
+
 PATCH http://localhost:3759/user/635bd22f4808257bf1cbdb05
 Content-Type: application/json
 

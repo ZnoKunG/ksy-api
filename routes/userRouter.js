@@ -30,6 +30,23 @@ userRouter.post('/user', async (req, res) => {
     }
 })
 
+userRouter.post('/user/login', async (req, res) => {
+    const userInput = { ...req.body }
+    const user = await User.findOne({ email: userInput.email })
+    if (user == null) {
+        res.status(400).json({ message: "user not found" })
+    }
+    try {
+        if (await bcrypt.compare(userInput.password, user.password)) {
+            res.status(200).json({ message: 'success' })
+        } else {
+            res.status(400).json({ message: 'password incorrect' })
+        }
+    } catch (err) {
+        res.status(500).json({ message: err.mesage })
+    }
+})
+
 userRouter.patch('/user/:id', async (req, res) => {
     try {
         id = req.params.id
