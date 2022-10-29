@@ -87,9 +87,9 @@ async function paginatedResults(req, res, next) {
         const dayOffset = parseInt(req.query.offset ?? "0")
         const date = new Date(Date.now())
         date.setDate(date.getDate() + dayOffset)
-        date.setHours(7, 0, 0, 0)
+        date.setHours(0, 0, 0, 0)
         console.log(date)
-        employees = await Employee.find({ birthDay: { $eq: date } })
+        employees = await Employee.find({ birthDay: date })
     } catch (err) {
         return res.status(500).json({ message: err.message })
     }
