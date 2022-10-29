@@ -6,10 +6,10 @@ const userRouter = require('./routes/userRouter');
 require('dotenv').config()
 
 var corsOptions = {
-    origin: 'http://localhost:3500/',
+    origin: 'https://ksy-dashboard.herokuapp.com',
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
-const cors = require('cors');
+const cors = require('cors', corsOptions);
 const app = express()
 app.use(express.json())
 app.use(cors())
