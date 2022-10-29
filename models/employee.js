@@ -5,13 +5,10 @@ const employeeSchema = new mongoose.Schema({
         type: mongoose.SchemaTypes.ObjectId,
         auto: true,
     },
-    firstName: {
+    name: {
         type: String,
         required: true,
-    },
-    lastName: {
-        type: String,
-        required: true,
+        unique: true
     },
     nickName: {
         type: String

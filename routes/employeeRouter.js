@@ -2,7 +2,15 @@ const express = require('express');
 const employeeRouter = express.Router();
 const Employee = require('../models/employee');
 
-employeeRouter.get('/employee', paginatedResults, async (req, res) => {
+employeeRouter.get('/employee', async (req, res) => {
+    try {
+        const employees = await Employee.find()
+        res.status(200).json(employees)
+    } catch (err) {
+        res.status(500).json({ message: err.mesage })
+    }
+})
+employeeRouter.get('/employee/birthday', paginatedResults, async (req, res) => {
     res.status(200).json(res.employees)
 })
 
@@ -12,6 +20,7 @@ employeeRouter.get('/employee/:id', getEmployee, async (req, res) => {
 
 employeeRouter.post('/employee', async (req, res) => {
     try {
+        await Employee.init()
         employeeData = { ...req.body }
         employeeData.birthDay = new Date(employeeData.birthDay)
         const employee = await Employee.create(employeeData)
@@ -74,15 +83,13 @@ async function getEmployee(req, res, next) {
 
 async function paginatedResults(req, res, next) { 
     let employees
-    
     try {
-        const subject = req.query.subject ?? ""
-        if (subject == "") {
-            employees = await Employee.find()
-        }
-        else {
-            employees = await Employee.find({ subject: subject })
-        }
+        const dayOffset = parseInt(req.query.offset ?? "0")
+        const date = new Date(Date.now())
+        date.setDate(date.getDate() + dayOffset)
+        date.setHours(7, 0, 0, 0)
+        console.log(date)
+        employees = await Employee.find({ birthDay: { $eq: date } })
     } catch (err) {
         return res.status(500).json({ message: err.message })
     }
@@ -93,6 +100,7 @@ async function paginatedResults(req, res, next) {
 
     const startIndex = (page - 1) * limit
     const endIndex = page * limit
+
     employees = employees.slice(startIndex, endIndex) 
     
     res.employees = employees

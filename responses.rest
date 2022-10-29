@@ -1,4 +1,7 @@
-GET http://localhost:3759/user
+GET http://localhost:3759/employee/birthday?offset=1
+###
+
+GET http://localhost:3759/employee
 
 ###
 
@@ -6,13 +9,12 @@ GET http://localhost:3759/user/test@gmail.com
 
 ###
 
-POST http://localhost:3759/user
+POST http://localhost:3759/employee
 Content-Type: application/json
 
 {
-    "name": "Zno",
-    "email": "test2@gmail.com",
-    "password": "1234"
+    "name": "asdas2222d asfrfyrftgasddasdfdfdfdasd",
+    "birthDay": "2022-10-30"
 }
 
 ###
@@ -40,4 +42,4 @@ DELETE http://localhost:3759/user/635bce1c2b4e86da82cd5f95
 
 ### 
 
-DELETE http://localhost:3759/user?confirm=true
+DELETE http://localhost:3759/employee?confirm=true
