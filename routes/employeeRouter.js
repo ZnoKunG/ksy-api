@@ -46,7 +46,7 @@ employeeRouter.patch('/employee/:id', async (req, res) => {
 employeeRouter.delete('/employee/:id', getEmployee, async (req, res) => {
     try {
         await res.employee.remove()
-        res.json({ message: `employee with name ${res.employee.firstName} ${res.employee.lastName} was deleted`})
+        res.json({ message: `employee with name ${res.employee.name} was deleted`})
     } catch (err) {
         res.status(500).json({ message: err.message })
     }
@@ -55,9 +55,9 @@ employeeRouter.delete('/employee/:id', getEmployee, async (req, res) => {
 employeeRouter.delete('/employee', async (req, res) => {
     try {
         const confirmDelete = req.query.confirm == "true" ? true : false
-        if (confirmDelete){
-            Employee.deleteMany({})
-            res.json({ mesage: "All employees were deleted"})
+        if (confirmDelete) {
+            await Employee.deleteMany({})
+            res.status(202).json({ message: "All employees were deleted"})
         } else {
             res.status(400).json({message: "did not confirm to delete all employees"})
         }
@@ -88,7 +88,6 @@ async function paginatedResults(req, res, next) {
         const date = new Date(Date.now())
         date.setDate(date.getDate() + dayOffset)
         date.setHours(7, 0, 0, 0)
-        console.log(date)
         employees = await Employee.find({ birthDay: { $eq: date } })
     } catch (err) {
         return res.status(500).json({ message: err.message })

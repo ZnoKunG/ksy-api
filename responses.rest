@@ -13,7 +13,7 @@ POST http://localhost:3759/employee
 Content-Type: application/json
 
 {
-    "name": "asdas2222d asfrfyrftgasddasdfdfdfdasd",
+    "name": "adfewsrf",
     "birthDay": "2022-10-30"
 }
 
@@ -38,7 +38,7 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3759/user/635bce1c2b4e86da82cd5f95
+DELETE http://localhost:3759/employee/635cc06cd064fbda24fd12c0
 
 ### 
 
