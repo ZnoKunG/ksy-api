@@ -75,7 +75,7 @@ async function getEmployee(req, res, next) {
             return res.status(404).json( { message: `An employee from id ${id} Not Found`} )
         }
     } catch (err) {
-        return res.status(500).json({ message: err.message })
+        res.status(500).json({ message: "Internal Server Error" })
     }
     res.employee = employee
     next()
@@ -85,13 +85,12 @@ async function paginatedResults(req, res, next) {
     let employees
     try {
         const dayOffset = parseInt(req.query.offset ?? "0")
-        const date = new Date(Date.now())
+        const date = new Date()
         date.setDate(date.getDate() + dayOffset)
         date.setHours(0, 0, 0, 0)
-        console.log(date)
         employees = await Employee.find({ birthDay: date })
     } catch (err) {
-        return res.status(500).json({ message: err.message })
+        return res.status(500).json({ message: "Internal Server Error" })
     }
 
     // set limit and page and subject
