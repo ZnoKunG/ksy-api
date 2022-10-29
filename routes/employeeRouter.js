@@ -89,7 +89,17 @@ async function paginatedResults(req, res, next) {
         date.setDate(date.getDate() + dayOffset)
         date.setUTCHours(0, 0, 0, 0)
         console.log(date)
-        employees = await Employee.find({ birthDay: date })
+        employees = await Employee.aggregate([
+            {
+                $project: {
+                    name: "$name",
+                    nickName: "$nickName",
+                    month: { $month: "$birthDay" },
+                    day: { $dayOfMonth: "$birthDay" }
+                }
+            },
+            { $match: { "month": date.getMonth() + 1, "day": date.getDate() }}
+        ])
     } catch (err) {
         return res.status(500).json({ message: "Internal Server Error" })
     }
